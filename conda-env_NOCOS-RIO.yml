@@ -1,0 +1,22 @@
+# To create the environment:
+# #########################
+# conda env create -f conda-env_NOCOS-RIO.yml
+#    To update if yml-file has changed:
+#    conda env update --file conda-env_NOCOS-RIO.yml --prune 
+# To use the environment:
+# ######################
+# conda activate rioNOCOS
+name: rioNOCOS
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.9
+  - numpy
+  - xarray
+  - pyyaml
+  - schedule
+  - dask        # for xarray
+  - netCDF4     # for xarray
+  - bottleneck  # for xarray
+  - matplotlib
+  

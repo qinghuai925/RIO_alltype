@@ -1,0 +1,68 @@
+# Name of the input file(s) containing ice information
+# You can specify one filename or a string glob in the form "path/to/my/files/*.nc" to merge multiple files (e.g. along time dimension).
+Dates:
+  basedate: '20230913'
+  targetdates:
+    - '20230913'
+    - '20230914'
+    - '20230915'
+ice_filename:
+  - /home/zhang/Documents/python/20230913_S2S/ready/s2s_20230913_cf000_20230913_box.nc
+  - /home/zhang/Documents/python/20230913_S2S/ready/s2s_20230913_cf000_20230914_box.nc
+  - /home/zhang/Documents/python/20230913_S2S/ready/s2s_20230913_cf000_20230915_box.nc
+
+
+# Information about variable oordinates
+coordinates:
+   ncat: 1           # Number of ice thickness categories
+   ncat_name:   # Name of ncat dimension (if ncat > 1)
+   time_name: time_counter   # Name of time dimension
+   lat_name: nav_lat     # Name of latitude field (only for plotting)
+   lon_name: nav_lon     # Name of longitude field (only for plotting)
+
+# Which (relevant) variables are contained in your file?
+variables:
+   siconc_name:  ileadfra         # Percentage of grid cell covered by sea ice
+   sithick_name: iicethic         # Actual (floe) thickness of sea ice (not volume)
+   sivol_name:            # Total volume of sea ice divided by grid-cell area
+   siitdconc_name:        # Percentage of grid cell covered by each ice-thickness categor
+   siitdthick_name:       # Actual (floe) thickness of sea ice in each category
+   siitdvol_name:         # Ice volume in each categroy divided by whole grid cell area
+   siage_name:            # Age of sea ice (needed if Lage=T)
+   sisali_name:           # Mean sea-ice salinity of all sea ice in grid cell (needed if Lsal=T)
+
+# Method how RIO should be calculated
+RIOmethod:
+   Lthick: True  # Calculate RIO purely based on ice thickness info
+   Lage:   False  # Calculate RIO based on ice thickness and ice age
+   Lsal:   False  # Calculate RIO based on ice thickness and salinity
+
+# Select time or space range
+selectdata: # Not implemented yet
+
+# Output
+output:
+   filename_automatic: False
+   filename:     RIO_s2s_20230913_cf000_20230913_20230914_20230915_box.nc      # *.nc (Only the name, not a full path)
+   shipclasses:  # For which shipclasses the calculation should be done (make sure indentation is correct)
+#       - PC1
+#       - PC2
+#       - PC3
+#       - PC4
+      - PC5
+#       - PC6
+#       - PC7
+#       - 1ASuper
+#       - 1A
+#       - 1B
+#       - 1C
+#       - noclass
+   output_folder: /home/zhang/Documents/python/20230913_S2S/     # If different from working directory
+   title:         Risk Index Outcome (RIO) calculated from ECMWF S2S data # Given as global attribute to the RIO netcdf file
+   
+#Plot
+Plot:
+    title: Generated using \n ECMWF S2S data
+#Datasource
+Datasource: ECMWF
+

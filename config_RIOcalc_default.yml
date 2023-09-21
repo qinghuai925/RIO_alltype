@@ -1,0 +1,51 @@
+# Name of the input file(s) containing ice information
+# You can specify one filename or a string glob in the form "path/to/my/files/*.nc" to merge multiple files (e.g. along time dimension).
+ice_filename: /path/to/icedata-files_????-??-??.nc
+
+# Information about variable oordinates
+coordinates:
+   ncat: 6           # Number of ice thickness categories
+   ncat_name: nccat  # Name of ncat dimension (if ncat > 1)
+   time_name: time   # Name of time dimension
+   lat_name: lat     # Name of latitude field (only for plotting)
+   lon_name: lon     # Name of longitude field (only for plotting)
+
+# Which (relevant) variables are contained in your file?
+variables:
+   siconc_name:           # Percentage of grid cell covered by sea ice
+   sithick_name:          # Actual (floe) thickness of sea ice (not volume)
+   sivol_name:            # Total volume of sea ice divided by grid-cell area
+   siitdconc_name:  aicen # Percentage of grid cell covered by each ice-thickness categor
+   siitdthick_name:       # Actual (floe) thickness of sea ice in each category
+   siitdvol_name:   vicen # Ice volume in each categroy divided by whole grid cell area
+   siage_name:            # Age of sea ice (needed if Lage=T)
+   sisali_name:           # Mean sea-ice salinity of all sea ice in grid cell (needed if Lsal=T)
+
+# Method how RIO should be calculated
+RIOmethod:
+   Lthick: True  # Calculate RIO purely based on ice thickness info
+   Lage:   False  # Calculate RIO based on ice thickness and ice age
+   Lsal:   False  # Calculate RIO based on ice thickness and salinity
+
+# Select time or space range
+selectdata: # Not implemented yet
+
+# Output
+output:
+   filename_automatic: True
+   filename:      RIOoutupt.nc      # *.nc (Only the name, not a full path)
+   output_folder: ./outputRIO/     # If different from working directory
+   title:         Risk Index Outcome (RIO) calculated from .... data # Given as global attribute to the RIO netcdf file
+   shipclasses:  # For which shipclasses the calculation should be done (make sure indentation is correct)
+      - PC1
+      - PC2
+      - PC3
+      - PC4
+      - PC5
+      - PC6
+      - PC7
+      - 1ASuper
+      - 1A
+      - 1B
+      - 1C
+      - noclass

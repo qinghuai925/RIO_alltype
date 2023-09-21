@@ -1,0 +1,64 @@
+# Name of the input file(s) containing ice information
+# You can specify one filename or a string glob in the form "path/to/my/files/*.nc" to merge multiple files (e.g. along time dimension).
+#ice_filename: /home/ang/ana/rio_DMI/test/iceh_inst.2019-11-01-00000.nc
+#ice_filename: /home/ang/ana/rio_DMI/test/iceh_inst.2020-04-07-00000.nc
+#ice_filename: /home/ang/ana/rio_DMI/test/iceh_inst.20*.nc
+Dates:
+  targetdates:
+    - '20100115'
+
+ice_filename: /home/zhang/Documents/python/RIO_DMI/iceh_inst.2010-01-15-00000_selectedvars.nc  
+
+# Information about variable oordinates
+coordinates:
+   ncat: 6           # Number of ice thickness categories
+   ncat_name: nc     # Name of ncat dimension (if ncat > 1)
+   time_name: time   # Name of time dimension
+   lat_name: TLAT    # Name of latitude field (only for plotting)
+   lon_name: TLON    # Name of longitude field (only for plotting)
+
+# Which (relevant) variables are contained in your file?
+variables:
+   siconc_name:           # Percentage of grid cell covered by sea ice
+   sithick_name:          # Actual (floe) thickness of sea ice (not volume)
+   sivol_name:            # Total volume of sea ice divided by grid-cell area
+   siitdconc_name:  aicen # Percentage of grid cell covered by each ice-thickness categor
+   siitdthick_name:       # Actual (floe) thickness of sea ice in each category
+   siitdvol_name:   vicen # Ice volume in each categroy divided by whole grid cell area
+   siage_name:       iage # Age of sea ice
+   sisali_name:      sice # Mean sea-ice salinity of all sea ice in grid cell
+
+# Method how RIO should be calculated
+RIOmethod:
+   Lthick: False  # Calculate RIO purely based on ice thickness info
+   Lage:   True  # Calculate RIO based on ice thickness and ice age
+   Lsal:   False  # Calculate RIO based on ice thickness and salinity
+
+# Select time or space range
+selectdata: # Not implemented yet
+
+# Output
+output:
+   filename_automatic: True
+   filename: #RIO_iceh_inst.2010-01-15-00000_selectedvars.nc #(Only the name, not a full path)
+   output_folder: /home/zhang/Documents/python/RIO_DMI/   # If different from working directory
+   title:         Risk Index Outcome (RIO) calculated from DMI's HYCOM-CICE data # Given as global attribute to the RIO netcdf file
+   shipclasses:  # For which shipclasses the calculation should be done (make sure indentation is correct)
+           #           - PC1
+           #           - PC2
+           #- PC3
+           #           - PC4
+           - PC5
+           #           - PC6
+           #- PC7
+           #- 1ASuper
+           #- 1A
+             #           - 1B
+             #           - 1C
+           #- noclass
+
+#Plot
+Plot:
+    title: Generated using DMI's HYCOM-CICE data
+#Datasource
+Datasource: DMI
